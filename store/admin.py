@@ -12,11 +12,11 @@ from .models import (
 
 
 class SupplierAdmin(admin.ModelAdmin):
-    list_display = ['user', 'name', 'address', 'created_date']
+    list_display = ['user', 'name', 'address', 'type','risk','url','tenure','created_date']
 
 
 class BuyerAdmin(admin.ModelAdmin):
-    list_display = ['user', 'name', 'address', 'created_date']
+    list_display = ['user', 'name', 'address', 'type','risk','goals','tenure','created_date']
 
 
 admin.site.register(Supplier, SupplierAdmin)

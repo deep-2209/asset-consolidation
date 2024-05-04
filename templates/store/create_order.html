@@ -18,7 +18,7 @@
                     <div class="page-title">
                         <ol class="breadcrumb text-right">
                             <li><a href="#">Dashboard</a></li>
-                            <li><a href="#">Order</a></li>
+                            <li><a href="#">Investment Transactions</a></li>
                             <li class="active">Create</li>
                         </ol>
                     </div>
@@ -34,7 +34,7 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header">
-                <strong class="card-title">Create Order</strong>
+                <strong class="card-title">Create Investment Transactions</strong>
             </div>
             <div class="card-body">
                 <!-- Credit Card -->
@@ -43,36 +43,37 @@
                         <form action="#" method="post" novalidate="novalidate">
                             {% csrf_token %}
                             <div class="form-group">
-                                <label for="supplier" class="control-label mb-1">Supplier</label>
+                                <label for="supplier" class="control-label mb-1">Counter Party</label>
                                 {{ form.supplier }}
                             </div>
                             <div class="form-group">
-                                <label for="product" class="control-label mb-1">Product</label>
-                                {{ form.product }}
-                            </div>
-                            <div class="form-group">
-                                <label for="design" class="control-label mb-1">Design</label>
-                                {{ form.design }}
-                            </div>
-                            <div class="form-group">
-                                <label for="color" class="control-label mb-1">Color</label>
-                                {{ form.color }}
-                            </div>
-                            <div class="form-group">
-                                <label for="buyer" class="control-label mb-1">Buyer</label>
+                                <label for="buyer" class="control-label mb-1">Investor</label>
                                 {{ form.buyer }}
                             </div>
                             <div class="form-group">
-                                <label for="season" class="control-label mb-1">Season</label>
+                                <label for="product" class="control-label mb-1">Investment Product</label>
+                                {{ form.product }}
+                            </div>
+                            <div class="form-group">
+                                <label for="product" class="control-label mb-1">Investment Strategy</label>
                                 {{ form.season }}
                             </div>
                             <div class="form-group">
-                                <label for="drop" class="control-label mb-1">Drop</label>
-                                {{ form.drop }}
+                                <label for="product" class="control-label mb-1">Type</label>
+                                {{ form.typee }}
                             </div>
+                            <div class="form-group">
+                                <label for="supplier" class="control-label mb-1">Amount</label>
+                                {{ form.amt }}
+                            </div>
+                            <div class="form-group">
+                                <label for="supplier" class="control-label mb-1">Notes</label>
+                                {{ form.notes }}
+                            </div>
+                            
                             <div>
                                 <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">
-                                    <span id="payment-button-amount">Create Order</span>
+                                    <span id="payment-button-amount">Create Investment Transactions</span>
                                 </button>
                             </div>
                         </form>

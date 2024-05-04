@@ -1,7 +1,6 @@
 {% extends 'base/base.html' %}
 
 {% block title %}Supplier List{% endblock title %}
-
 {% block breadcrumbs %}
 <div class="breadcrumbs">
     <div class="breadcrumbs-inner">
@@ -18,7 +17,7 @@
                     <div class="page-title">
                         <ol class="breadcrumb text-right">
                             <li><a href="#">Dashboard</a></li>
-                            <li><a href="#">Supplier</a></li>
+                            <li><a href="#">Counter Party</a></li>
                             <li class="active">List</li>
                         </ol>
                     </div>
@@ -33,8 +32,9 @@
 <div class="row">
     <div class="col-xl-12">
         <div class="card">
-            <div class="card-body">
-                <h4 class="box-title">Supplier List </h4>
+            <div class="card-body d-flex justify-content-between align-items-center">
+                <h4 class="box-title mb-0">Counter Party List </h4>
+                <a href="{% url 'download_pdf' %}" class="btn btn-primary">Download PDF</a>
             </div>
             <div class="card-body--">
                 <div class="table-stats order-table ov-h">
@@ -45,7 +45,15 @@
                                 <th>Name</th>
                                 <th>Address</th>
                                 <th>Email</th>
+                                <th>Username</th>
+                                <th>Type</th>
+                                <!-- <th>Rate of Interest</th> -->
+                                <th>Tenure of Investment</th>
+                                <th>Risk Rating</th>
+                                <th>Website URL</th>
                                 <th>Date</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -56,11 +64,29 @@
                                 <td>{{ supplier.name }}</td>
                                 <td>{{ supplier.address }}</td>
                                 <td>{{ supplier.user.email }}</td>
+                                <td>{{ supplier.user }}</td>
+                                <td>{{ supplier.type }}</td>
+                                <!-- <td>{{ supplier.interest }}</td> -->
+                                <td>{{ supplier.tenure }}</td>
+                                <td>{{ supplier.risk }}</td>
+                                <td>{{ supplier.url }}</td>
                                 <td>{{ supplier.created_date }}</td>
+                                <td>            
+                                    <form action="{% url 'update_supplier' supplier.id %}" method="post" >
+                                        {% csrf_token %}
+                                        <input class="btn btn-primary" type="submit" value="Edit">
+                                    </form> 
+                                </td>
+                                <td>
+                                    <form action="{% url 'delete_supplier' supplier.id %}" method="post"  onsubmit="return confirm('Are you sure you want to delete this Counter Party?')" >
+                                        {% csrf_token %}
+                                        <input class="btn btn-danger" type="submit" value="Delete">
+                                    </form>
+                                </td>
                             </tr>
                             {% endfor %}
                             {% else %}
-                                <tr><td>No Supplier Data</td></tr>
+                                <tr><td>No Data</td></tr>
                             {% endif %}
                         </tbody>
                     </table>

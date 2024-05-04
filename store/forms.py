@@ -28,18 +28,54 @@ class SupplierForm(forms.Form):
         'data-val': 'true',
         'data-val-required': 'Please enter username',
     }))
-    password = forms.CharField(widget=forms.PasswordInput(attrs={
+
+    type = forms.CharField(widget=forms.TextInput(attrs={
         'class': 'form-control',
-        'id': 'password',
+        'id': 'type',
         'data-val': 'true',
-        'data-val-required': 'Please enter password',
+        'data-val-required': 'Please enter type',
     }))
-    retype_password = forms.CharField(widget=forms.PasswordInput(attrs={
+
+    risk = forms.CharField(widget=forms.TextInput(attrs={
         'class': 'form-control',
-        'id': 'retype_password',
+        'id': 'risk',
         'data-val': 'true',
-        'data-val-required': 'Please enter retype_password',
+        'data-val-required': 'Please enter Risk Rating',
     }))
+
+    url = forms.CharField(widget=forms.TextInput(attrs={
+        'class': 'form-control',
+        'id': 'url',
+        'data-val': 'true',
+        'data-val-required': 'Please enter Website URL',
+    }))
+
+    # interest = forms.CharField(widget=forms.TextInput(attrs={
+    #     'class': 'form-control',
+    #     'id': 'interest',
+    #     'data-val': 'true',
+    #     'data-val-required': 'Please enter interest',
+    # }))
+
+    tenure = forms.CharField(widget=forms.TextInput(attrs={
+        'class': 'form-control',
+        'id': 'tenure',
+        'data-val': 'true',
+        'data-val-required': 'Please enter tenure',
+    }))
+
+    # password = forms.CharField(widget=forms.PasswordInput(attrs={
+    #     'class': 'form-control',
+    #     'id': 'password',
+    #     'data-val': 'true',
+    #     'data-val-required': 'Please enter password',
+    # }))
+    # retype_password = forms.CharField(widget=forms.PasswordInput(attrs={
+    #     'class': 'form-control',
+    #     'id': 'retype_password',
+    #     'data-val': 'true',
+    #     'data-val-required': 'Please enter retype_password',
+    # }))
 
 
 class BuyerForm(forms.Form):
@@ -67,34 +103,69 @@ class BuyerForm(forms.Form):
         'data-val': 'true',
         'data-val-required': 'Please enter username',
     }))
-    password = forms.CharField(widget=forms.PasswordInput(attrs={
+    type = forms.CharField(widget=forms.TextInput(attrs={
         'class': 'form-control',
-        'id': 'password',
+        'id': 'type',
         'data-val': 'true',
-        'data-val-required': 'Please enter password',
+        'data-val-required': 'Please enter type',
     }))
-    retype_password = forms.CharField(widget=forms.PasswordInput(attrs={
+
+    risk = forms.CharField(widget=forms.TextInput(attrs={
         'class': 'form-control',
-        'id': 'retype_password',
+        'id': 'risk',
         'data-val': 'true',
-        'data-val-required': 'Please enter retype_password',
+        'data-val-required': 'Please enter Risk Rating',
     }))
+
+    goals = forms.CharField(widget=forms.TextInput(attrs={
+        'class': 'form-control',
+        'id': 'goals',
+        'data-val': 'true',
+        'data-val-required': 'Please enter Website URL',
+    }))
+    # interest = forms.CharField(widget=forms.TextInput(attrs={
+    #     'class': 'form-control',
+    #     'id': 'interest',
+    #     'data-val': 'true',
+    #     'data-val-required': 'Please enter interest',
+    # }))
+
+    tenure = forms.CharField(widget=forms.TextInput(attrs={
+        'class': 'form-control',
+        'id': 'tenure',
+        'data-val': 'true',
+        'data-val-required': 'Please enter tenure',
+    }))
+    # password = forms.CharField(widget=forms.PasswordInput(attrs={
+    #     'class': 'form-control',
+    #     'id': 'password',
+    #     'data-val': 'true',
+    #     'data-val-required': 'Please enter password',
+    # }))
+    # retype_password = forms.CharField(widget=forms.PasswordInput(attrs={
+    #     'class': 'form-control',
+    #     'id': 'retype_password',
+    #     'data-val': 'true',
+    #     'data-val-required': 'Please enter retype_password',
+    # }))
 
 
 class SeasonForm(forms.ModelForm):
     class Meta:
         model = Season
-        fields = ['name', 'description']
+        fields = ['name', 'returnn','description']
 
         widgets = {
             'name': forms.TextInput(attrs={
                 'class': 'form-control', 'id': 'name'
             }),
+            'returnn': forms.TextInput(attrs={
+                'class': 'form-control', 'id': 'returnn'
+            }),
             'description': forms.TextInput(attrs={
                 'class': 'form-control', 'id': 'description'
             })
         }
-
 
 class DropForm(forms.ModelForm):
     class Meta:
@@ -110,10 +181,16 @@ class DropForm(forms.ModelForm):
 class ProductForm(forms.ModelForm):
     class Meta:
         model = Product
-        fields = ['name', 'sortno']
+        fields = ['name', 'classs','season', 'sortno']
         widgets = {
             'name': forms.TextInput(attrs={
                 'class': 'form-control', 'id': 'name'
+            }),
+            'classs': forms.TextInput(attrs={
+                'class': 'form-control', 'id': 'class'
+            }),
+            'season': forms.Select(attrs={
+                'class': 'form-control', 'id': 'season'
             }),
             'sortno': forms.NumberInput(attrs={
                 'class': 'form-control', 'id': 'sortno'
@@ -125,7 +202,7 @@ class OrderForm(forms.ModelForm):
     class Meta:
         model = Order
         fields = [
-            'supplier', 'product', 'design', 'color', 'buyer', 'season', 'drop'
+            'supplier', 'product', 'typee','amt','notes', 'buyer','season'
         ]
 
         widgets = {
@@ -135,21 +212,30 @@ class OrderForm(forms.ModelForm):
             'product': forms.Select(attrs={
                 'class': 'form-control', 'id': 'product'
             }),
-            'design': forms.TextInput(attrs={
-                'class': 'form-control', 'id': 'design'
+            'typee': forms.TextInput(attrs={
+                'class': 'form-control', 'id': 'typee'
             }),
-            'color': forms.TextInput(attrs={
-                'class': 'form-control', 'id': 'color'
+            'amt': forms.TextInput(attrs={
+                'class': 'form-control', 'id': 'amt'
             }),
+            'notes': forms.TextInput(attrs={
+                'class': 'form-control', 'id': 'notes'
+            }),
+            # 'design': forms.TextInput(attrs={
+            #     'class': 'form-control', 'id': 'design'
+            # }),
+            # 'color': forms.TextInput(attrs={
+            #     'class': 'form-control', 'id': 'color'
+            # }),
             'buyer': forms.Select(attrs={
                 'class': 'form-control', 'id': 'buyer'
             }),
             'season': forms.Select(attrs={
                 'class': 'form-control', 'id': 'season'
             }),
-            'drop': forms.Select(attrs={
-                'class': 'form-control', 'id': 'drop'
-            }),
+            # 'drop': forms.Select(attrs={
+            #     'class': 'form-control', 'id': 'drop'
+            # }),
         }
 
 

@@ -1,46 +1,19 @@
 {% extends 'base/base.html' %}
 
-{% block title %}Create Buyer{% endblock title %}
-
-{% block breadcrumbs %}
-<div class="breadcrumbs">
-    <div class="breadcrumbs-inner">
-        <div class="row m-0">
-            <div class="col-sm-4">
-                <div class="page-header float-left">
-                    <div class="page-title">
-                        <h1>Dashboard</h1>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-8">
-                <div class="page-header float-right">
-                    <div class="page-title">
-                        <ol class="breadcrumb text-right">
-                            <li><a href="#">Dashboard</a></li>
-                            <li><a href="#">Investor</a></li>
-                            <li class="active">Create</li>
-                        </ol>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-{% endblock breadcrumbs %}
+{% block title %}Update Supplier{% endblock title %}
 
 {% block content %}
 <div class="row">
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header">
-                <strong class="card-title">Create Investor</strong>
+                <strong class="card-title">Update Investor</strong>
             </div>
             <div class="card-body">
                 <!-- Credit Card -->
                 <div id="pay-invoice">
                     <div class="card-body">
-                        <form action="#" method="post" novalidate="novalidate">
+                        <form method="post">
                             {% csrf_token %}
                             <div class="form-group">
                                 <label for="name" class="control-label mb-1">Name</label>
@@ -75,35 +48,15 @@
                                 {{ form.risk }}
                             </div>
                             <div class="form-group">
-                                <label for="goals" class="control-label mb-1">Investment Goals</label>
+                                <label for="url" class="control-label mb-1">Investment Goals</label>
                                 {{ form.goals }}
                             </div>
-                            <!-- <div class="row">
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <label for="password" class="control-label mb-1">Password</label>
-                                        {{ form.password }}
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <label for="retype_password" class="control-label mb-1">Retype Password</label>
-                                        {{ form.retype_password }}
-                                    </div>
-                                </div>
-                            </div> -->
-                            <div>
-                                <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">
-                                    <span id="payment-button-amount">Create Investor</span>
-                                </button>
-                            </div>
+                            <button type="submit" class="btn btn-primary">Update Investor</button>
                         </form>
                     </div>
                 </div>
-
             </div>
         </div> <!-- .card -->
-
     </div><!--/.col-->
 </div>
 {% endblock content %}

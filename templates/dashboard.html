@@ -4,18 +4,22 @@
 
 {% block content %}
     <!-- Widgets  -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
+    <script
+src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+</script>
     <div class="row">
         <div class="col-lg-3 col-md-6">
             <div class="card">
                 <div class="card-body">
                     <div class="stat-widget-five">
                         <div class="stat-icon dib flat-color-1">
-                            <i class="fa fa-cart-plus"></i>
+                            <i class="fa fa-exchange"></i>
                         </div>
                         <div class="stat-content">
                             <div class="text-left dib">
                                 <div class="stat-text"><span class="count">{{ order }}</span></div>
-                                <div class="stat-heading">Order</div>
+                                <div class="stat-heading">Transactions</div>
                             </div>
                         </div>
                     </div>
@@ -33,7 +37,7 @@
                         <div class="stat-content">
                             <div class="text-left dib">
                                 <div class="stat-text"><span class="count">{{ product }}</span></div>
-                                <div class="stat-heading">Product</div>
+                                <div class="stat-heading">Investment Product</div>
                             </div>
                         </div>
                     </div>
@@ -51,7 +55,7 @@
                         <div class="stat-content">
                             <div class="text-left dib">
                                 <div class="stat-text"><span class="count">{{ supplier }}</span></div>
-                                <div class="stat-heading">Supplier</div>
+                                <div class="stat-heading">Counter Party</div>
                             </div>
                         </div>
                     </div>
@@ -69,7 +73,7 @@
                         <div class="stat-content">
                             <div class="text-left dib">
                                 <div class="stat-text"><span class="count">{{ buyer }}</span></div>
-                                <div class="stat-heading">Buyer</div>
+                                <div class="stat-heading">Investor</div>
                             </div>
                         </div>
                     </div>
@@ -78,16 +82,18 @@
         </div>
     </div>
     <!-- /Widgets -->
-    
+    <!-- PIE CHARTS  -->
     <div class="clearfix"></div>
-
+    <canvas id="counterPartyChart" style="width:100%;max-width:600px"></canvas>
+    <canvas id="investorChart" width="400" height="400"></canvas>
+    <!-- PIE CHARTS END -->
     <!-- Orders -->
     <div class="orders">
         <div class="row">
             <div class="col-xl-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="box-title">Orders </h4>
+                        <h4 class="box-title">Investment Transactions </h4>
                     </div>
                     <div class="card-body--">
                         <div class="table-stats order-table ov-h">
@@ -95,13 +101,13 @@
                                 <thead>
                                     <tr>
                                         <th class="serial">#</th>
-                                        <th>Supplier</th>
-                                        <th>Product</th>
-                                        <th>Design</th>
-                                        <th>Color</th>
-                                        <th>Buyer</th>
-                                        <th>Season</th>
-                                        <th>Drop</th>
+                                        <th>Counter Party</th>
+                                        <th>Investment Product</th>
+                                        <th>Investor</th>
+                                        <th>Amount</th>
+                                        <th>Investment Strategy</th>
+                                        <th>Notes</th>
+                                        <!-- <th>Drop</th> -->
                                         <th>Date</th>
                                         <th>Status</th>
                                     </tr>
@@ -113,12 +119,13 @@
                                         <td class="serial">{{ forloop.counter }}</td>
                                         <td>{{ order.supplier }}</td>
                                         <td>{{ order.product }}</td>
-                                        <td>{{ order.design }}</td>
-                                        <td>{{ order.color }}</td>
                                         <td>{{ order.buyer }}</td>
+                                        <!-- <td>{{ order.typee }}</td> -->
+                                        <td>{{ order.amt }}</td>
                                         <td>{{ order.season }}</td>
-                                        <td>{{ order.drop }}</td>
+                                        <td>{{ order.notes }}</td>
                                         <td>{{ order.created_date }}</td>
+                                        <!-- <td>{{ order.drop }}</td> -->
                                         <td>
                                             {% if order.status == 'pending' %}
                                                 <a class="btn btn-warning" href="">{{ order.status }}</a>
@@ -137,7 +144,7 @@
                                     </tr>
                                     {% endfor %}
                                     {% else %}
-                                        <tr><td>No Order Data</td></tr>
+                                        <tr><td>No Investment Transactions Data</td></tr>
                                     {% endif %}
                                 </tbody>
                             </table>
@@ -150,4 +157,32 @@
         </div>
     </div>
     <!-- /.orders -->
+
+    
+
+    <script>
+        // const labels = ["Italy", "France", "Spain", "USA", "Argentina"];
+        const labels = ["Very Low", "Low", "Moderate", "High", "Very High"];
+        // console.log(labels);
+        const dataa = [{{ very_low_count }}, {{ low_count }}, {{ moderate_count }}, {{ high_count }}, {{ very_high_count }}];
+        // const dataa = [55, 49, 44, 24, 15];
+        const backgroundColors = ["red", "green", "blue", "orange", "brown"];
+
+        new Chart("counterPartyChart", {
+        type: "pie",
+        data: {
+            labels: labels,
+            datasets: [{
+            backgroundColor: backgroundColors,
+            data: dataa
+            }]
+        },
+        options: {
+            title: {
+            display: true,
+            text: "Risk Rating of Counter Party"
+            }
+        }
+        });
+    </script>
 {% endblock content %}
